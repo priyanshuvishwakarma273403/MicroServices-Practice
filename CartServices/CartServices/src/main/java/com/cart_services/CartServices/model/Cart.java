@@ -35,7 +35,7 @@ public class Cart implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public class CartItem implements Serializable {
+    public static class CartItem implements Serializable {
         private String productId;
         private String productName;
         private Double price;
