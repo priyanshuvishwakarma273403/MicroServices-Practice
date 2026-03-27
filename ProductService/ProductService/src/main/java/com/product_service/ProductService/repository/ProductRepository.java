@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProductRepository extends MongoRepository<Product, String> {
 
@@ -20,6 +22,11 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     Page<Product> findByActiveTrueAndPriceBetween(Double minPrice, Double maxPrice, Pageable pageable);
 
-    List<Product>
+    List<Product> findByIdInAndActiveTrue(List<String> ids);
+
+    List<Product> findTop10ByActiveTrueOrderByRatingDesc();
+
+    @Query(value = "{ active: true }", fields = "{ category: 1 }")
+    List<Product> findAllActiveCategories();
 
 }
