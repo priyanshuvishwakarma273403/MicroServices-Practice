@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends MongoRepository<Product, String> {
 
-    Page<Product> findByCategoryAndActiveTrue(Pageable pageable, String category);
+    Page<Product> findByCategoryAndActiveTrue(  String category, Pageable pageable);
 
     @Query("{ $and: [ { active: true }, { $or: [ " +
             "{ name: { $regex: ?0, $options: 'i' } }, " +
