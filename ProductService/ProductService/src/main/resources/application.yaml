@@ -5,6 +5,9 @@ spring:
   application:
     name: product-service
 
+  profiles:
+    active: dev
+
   data:
     mongodb:
       uri: ${SPRING_DATA_MONGODB_URI:mongodb://admin:admin123@localhost:27017/ecom_products?authSource=admin}
@@ -18,7 +21,7 @@ spring:
   cache:
     type: redis
     redis:
-      time-to-live: 600000   # 10 min cache TTL
+      time-to-live: 600000
 
 management:
   endpoints:
