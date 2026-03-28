@@ -18,7 +18,7 @@ public class DataSeeder {
 
     private final ProductRepository productRepo;
 
-    // Sirf "dev" profile pe run hoga (prod pe nahi)
+
     @Bean
     @Profile("dev")
     public CommandLineRunner seedProducts() {
@@ -106,6 +106,4 @@ public class DataSeeder {
             log.info("Seeded {} products successfully.", products.size());
         };
     }
-
-
 }
