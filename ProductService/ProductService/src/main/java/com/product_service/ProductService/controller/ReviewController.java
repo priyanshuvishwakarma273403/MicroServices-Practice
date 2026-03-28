@@ -56,7 +56,6 @@ public class ReviewController {
 
     @Data
     static class ReviewRequest {
-
         @NotNull
         private Long userId;
 
@@ -75,5 +74,4 @@ public class ReviewController {
         @Size(min = 10, max = 1000)
         private String comment;
     }
-
 }
