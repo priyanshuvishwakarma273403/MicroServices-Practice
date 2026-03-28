@@ -1,5 +1,16 @@
 package com.order_service.OrderService.kafka;
 
-public class OrderConfirmedEvent extends BaseEvent {
 
+import lombok.*;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class OrderConfirmedEvent extends BaseEvent {
+    private Long orderId;
+    private Long userId;
+    private String paymentId;
+    private Double amount;
 }
