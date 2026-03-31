@@ -26,6 +26,8 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     List<Product> findTop10ByActiveTrueOrderByRatingDesc();
 
+    Page<Product> findByActiveTrue(Pageable pageable);
+
     @Query(value = "{ active: true }", fields = "{ category: 1 }")
     List<Product> findAllActiveCategories();
 

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const banners = [
-  { id: 1, image: 'https://rukminim2.flixcart.com/flap/1680/280/image/75a1571247c09b66.jpg?q=50' },
-  { id: 2, image: 'https://rukminim2.flixcart.com/flap/1680/280/image/50c517c186640c4a.jpg?q=50' },
-  { id: 3, image: 'https://rukminim2.flixcart.com/flap/1680/280/image/9320e6f33d74f26b.jpg?q=50' },
-  { id: 4, image: 'https://rukminim2.flixcart.com/flap/1680/280/image/8d39294d306b85c1.jpg?q=50' },
-  { id: 5, image: 'https://rukminim2.flixcart.com/flap/1680/280/image/7027ae6c6b24016b.jpg?q=50' },
+  { id: 1, image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1680&h=280&fit=crop&q=80' },
+  { id: 2, image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1680&h=280&fit=crop&q=80' },
+  { id: 3, image: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1680&h=280&fit=crop&q=80' },
+  { id: 4, image: 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=1680&h=280&fit=crop&q=80' },
+  { id: 5, image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1680&h=280&fit=crop&q=80' },
 ];
 
 const HeroBanner = () => {

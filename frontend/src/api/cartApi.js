@@ -1,21 +1,21 @@
 import axiosInstance from './axiosInstance';
 
-export const getCart = () => {
-  return axiosInstance.get('/api/cart');
+export const getCart = (userId) => {
+  return axiosInstance.get(`/api/cart/${userId}`);
 };
 
-export const addItemToCart = (productId, quantity = 1) => {
-  return axiosInstance.post('/api/cart/add', { productId, quantity });
+export const addItemToCart = (userId, item) => {
+  return axiosInstance.post(`/api/cart/${userId}/items`, item);
 };
 
-export const updateCartItem = (productId, quantity) => {
-  return axiosInstance.put(`/api/cart/update/${productId}`, { quantity });
+export const updateCartItem = (userId, productId, quantity) => {
+  return axiosInstance.put(`/api/cart/${userId}/items/${productId}`, null, { params: { quantity } });
 };
 
-export const removeCartItem = (productId) => {
-  return axiosInstance.delete(`/api/cart/remove/${productId}`);
+export const removeCartItem = (userId, productId) => {
+  return axiosInstance.delete(`/api/cart/${userId}/items/${productId}`);
 };
 
-export const clearCartApi = () => {
-  return axiosInstance.delete('/api/cart/clear');
+export const clearCartApi = (userId) => {
+  return axiosInstance.delete(`/api/cart/${userId}`);
 };

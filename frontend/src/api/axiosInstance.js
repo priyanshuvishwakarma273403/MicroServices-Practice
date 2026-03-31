@@ -34,9 +34,12 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
-      // Token expired or invalid
-      store.dispatch(logout());
-      window.location.href = '/login';
+      // Only force logout if we HAD a token (means session expired)
+      const token = localStorage.getItem('auth_token');
+      if (token) {
+        store.dispatch(logout());
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }

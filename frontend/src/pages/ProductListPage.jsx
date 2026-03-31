@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/common/ProductCard';
 import Pagination from '../components/common/Pagination';
 import { Filter, ChevronDown, CheckSquare, Square } from 'lucide-react';
-import { getAllProducts } from '../api/productApi';
+import { getAllProducts, searchProducts, getProductsByCategory } from '../api/productApi';
 
 const ProductListPage = () => {
   const [params] = useSearchParams();
@@ -22,16 +22,19 @@ const ProductListPage = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const apiParams = {
-          page: currentPage - 1,
-          size: 12,
-          category: category || undefined,
-          sort: sort !== 'relevance' ? sort : undefined
-        };
-        
-        const response = await getAllProducts(apiParams);
-        // Spring Boot Page object usually has .content
-        setProducts(response.data.content || response.data || []);
+        let response;
+        const searchQuery = params.get('q');
+
+        if (searchQuery) {
+          response = await searchProducts(searchQuery, currentPage - 1, 12);
+          setProducts(response.data.content || response.data || []);
+        } else if (category) {
+          response = await getProductsByCategory(category, currentPage - 1, 12);
+          setProducts(response.data.content || response.data || []);
+        } else {
+          response = await getAllProducts({ page: currentPage - 1, size: 12 });
+          setProducts(response.data.content || response.data || []);
+        }
         setLoading(false);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -40,7 +43,7 @@ const ProductListPage = () => {
       }
     };
     fetchProducts();
-  }, [category, sort, currentPage]);
+  }, [category, sort, currentPage, params]);
 
   const toggleBrand = (brand) => {
     setSelectedBrands(prev => 

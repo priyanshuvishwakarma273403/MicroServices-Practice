@@ -81,6 +81,12 @@ public class ProductService {
         return productRepo.findTop10ByActiveTrueOrderByRatingDesc();
     }
 
+    @Cacheable(value = "product-list", key = "'all_' + #page + '_' + #size")
+    public Page<Product> getAllProducts(int page, int size) {
+        PageRequest pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        return productRepo.findByActiveTrue(pageable);
+    }
+
     public boolean checkAndReduceStock(String productId, int qty){
         Product product = productRepo.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found : " + productId));
