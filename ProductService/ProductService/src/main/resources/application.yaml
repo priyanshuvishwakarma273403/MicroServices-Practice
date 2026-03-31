@@ -10,7 +10,7 @@ spring:
 
   data:
     mongodb:
-      uri: ${SPRING_DATA_MONGODB_URI:mongodb://admin:admin123@localhost:27017/ecom_products?authSource=admin}
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://localhost:27017/ecom_products}
 
     redis:
       host: ${SPRING_REDIS_HOST:localhost}
@@ -32,7 +32,7 @@ management:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_URL:http://admin:admin123@localhost:8761/eureka/}
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
     fetch-registry: true
     register-with-eureka: true
   instance:

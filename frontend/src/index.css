@@ -1,1 +1,90 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --blue: #2874F0;
+  --red: #FF6161;
+  --green: #26A541;
+  --bg: #F1F3F6;
+  --card: #FFFFFF;
+  --text: #212121;
+  --muted: #878787;
+  --border: #E0E0E0;
+}
+
+@layer base {
+  body {
+    @apply font-body bg-page-bg text-[#212121] antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white shadow-card transition-all duration-200 hover:shadow-card-hover;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white font-medium py-2 px-6 rounded-sm shadow-sm hover:shadow-md transition-all active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-primary border border-border font-medium py-2 px-6 rounded-sm hover:bg-gray-50 transition-all active:scale-95;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-white font-medium py-2 px-6 rounded-sm shadow-sm hover:bg-opacity-90 transition-all active:scale-95;
+  }
+
+  /* Skeleton animation */
+  .skeleton {
+    @apply relative overflow-hidden bg-gray-200;
+  }
+  
+  .skeleton::after {
+    @apply absolute inset-0 content-[''];
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* No scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Page transitions */
+.page-enter {
+  opacity: 0;
+}
+.page-enter-active {
+  opacity: 1;
+  transition: opacity 100ms ease-in;
+}
+
+/* Indian format currency - standard style can be extended here if needed */
+.price-tag::before {
+  content: '₹';
+  margin-right: 1px;
+}
+
+/* Custom fade animation */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
