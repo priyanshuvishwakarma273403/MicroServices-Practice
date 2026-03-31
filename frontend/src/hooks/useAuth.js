@@ -12,9 +12,10 @@ export const useAuth = () => {
   const login = async (email, password) => {
     try {
       const response = await loginApi(email, password);
-      const { user, token } = response.data;
-      dispatch(setAuth({ user, token }));
-      toast.success(`Welcome back, ${user.name}!`);
+      const { accessToken, userId, name, email: userEmail, role } = response.data;
+      const user = { id: userId, name, email: userEmail, role };
+      dispatch(setAuth({ user, token: accessToken }));
+      toast.success(`Welcome back, ${name}!`);
       return { success: true };
     } catch (error) {
       const message = error.response?.data?.message || 'Login failed. Please check your credentials.';
@@ -26,8 +27,9 @@ export const useAuth = () => {
   const register = async (userData) => {
     try {
       const response = await registerApi(userData);
-      const { user, token } = response.data;
-      dispatch(setAuth({ user, token }));
+      const { accessToken, userId, name, email, role } = response.data;
+      const user = { id: userId, name, email, role };
+      dispatch(setAuth({ user, token: accessToken }));
       toast.success('Registration successful!');
       return { success: true };
     } catch (error) {

@@ -22,7 +22,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req){
-        Map<String, Object> response = userService.register(req.name, req.password, req.email);
+        Map<String, Object> response = userService.register(req.name, req.email, req.password, req.phone);
         return  ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -59,6 +59,9 @@ public class UserController {
         @Email
         @NotBlank
         public String email;
+
+        @NotBlank
+        public String phone;
 
         @Size(min = 6)
         @NotBlank

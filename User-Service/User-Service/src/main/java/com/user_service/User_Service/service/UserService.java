@@ -23,7 +23,7 @@ public class UserService {
     private final JwtUtil jwtUtil;
     private final StringRedisTemplate redis;
 
-    public Map<String, Object> register(String name, String email, String password){
+    public Map<String, Object> register(String name, String email, String password, String phone){
         if(userRepo.existsByEmail(email)){
             throw new RuntimeException("Email Already Exists " + email);
         }
@@ -31,6 +31,7 @@ public class UserService {
         User user = User.builder()
                 .name(name)
                 .email(email)
+                .phone(phone)
                 .password(passwordEncoder.encode(password))
                 .build();
 
@@ -101,6 +102,7 @@ public class UserService {
         response.put("userId", user.getId());
         response.put("name", user.getName());
         response.put("email", user.getEmail());
+        response.put("phone", user.getPhone());
         response.put("role", user.getRole());
         return response;
     }

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { store } from '../store';
 import { logout } from '../store/authSlice';
 
+
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
   timeout: 10000,
@@ -9,6 +10,7 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
 
 // Request interceptor to add the JWT token to the header
 axiosInstance.interceptors.request.use(
@@ -24,6 +26,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+
 // Response interceptor to handle errors
 axiosInstance.interceptors.response.use(
   (response) => {
@@ -38,5 +41,6 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
 
 export default axiosInstance;
